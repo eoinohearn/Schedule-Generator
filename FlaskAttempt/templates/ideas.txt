@@ -1,0 +1,21 @@
+make it so you can have a couple differente schedules and this way you could have different plans
+
+add __repr__ to the course class
+
+start work on calculating all possible schedule combinations
+after that could work on creating a build-your-own schdule where a user go semester by semester picking classes
+create ability to create all possible schedules
+
+display schedules in order of least to most range of credits instead of only displaying the schedules with the least range
+create schedules with different curves of the ranges of credits e.g. heaviest semester near the end
+
+create a better way to compare if two schedules are the same
+    implement with __eq__ i think its called
+
+
+add better css styling on all DOM elements
+
+seperate the valid schedule button and save fav schedule button
+
+
+make it so the credit semester sums show on schedule in edit schdule

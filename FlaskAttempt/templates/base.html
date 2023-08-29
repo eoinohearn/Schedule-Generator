@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename = 'style.css')}}">
+</head>
+<body>
+    <div class="navbar">
+        <a href="/"><img src="{{url_for('static', filename = 'EoinOHearn-logo.svg')}}" alt="logo"></a>
+        
+        <ul>
+            <li><a href="/">Home</a></li>
+
+            {% if not current_user.is_authenticated %}
+            <li><a href="{{url_for('login')}}">Log In</a></li>
+            {% endif %}
+
+            {% if current_user.is_authenticated %}
+            <li><a href="{{url_for('classes')}}">Class List</a></li>
+            <li><a href="{{url_for('pickSchedule')}}">Schedules</a></li>
+            <li><a href="{{url_for('logout')}}">Logout</a></li>
+            {% endif %}
+        </ul>
+    </div>
+
+    {% block content %}
+    {% if current_user.is_authenticated %}
+    <h1>Welcome {{name}}</h1>
+    <h2>Favorite Schedule</h2>
+    <a href="{{url_for('editSchedule')}}">Edit Schedule</a>
+    {{schedule|safe}}
+    {% endif %}
+
+    {% if not current_user.is_authenticated %}
+    <h1>Please Login</h1>
+    {% endif %}
+    
+    {% endblock %}
+    
+    {% block scripts %}
+    <script src="{{ url_for('static', filename = 'script.js')}}"></script>
+    {% endblock %}
+</body>
+</html>

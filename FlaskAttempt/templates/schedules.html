@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div>
+    <input type="button" value="Save Schedule" class="save_Schedule">
+</div>
+<div class="all-tables">
+    {% for table in list_of_tables%}
+        <div class="schedule-table">{{table|safe}}
+            <input type="radio" name="schedules" value="{{table}}" id="{{ loop.index }}"><label for="{{ loop.index }}">Schedule {{loop.index}}</label>
+        </div>
+    {%endfor%}
+</div>
+<div class="fav-Schedule">
+    <h2>Current Favorite</h2>
+    {{favSchedule|safe}}
+</div>
+<div style="height: 1200px;"></div>
+
+{% endblock %}
+
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename = 'schedules_script.js')}}"></script>
+{% endblock %}

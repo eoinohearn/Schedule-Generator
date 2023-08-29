@@ -1,0 +1,65 @@
+{%extends "base.html"%}
+{% block content%}
+<div class = 'classes-page'>
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification">
+                {{ messages[0] }}
+            </div>
+    {% endif %}
+    {% endwith %}
+    <div class="form-holder" style="background-color: rgba(255, 182, 193, 0.682);">
+        <form action="/addClass" class="login-form" method="post">
+
+            <label for="name">Course Name<input type="text" name="name" id="name" autocomplete="off" autofocus></label>
+            <label for="hours">Credit Hours <input type="text" name="hours" id="hours" autocomplete="off"></label>
+            <label for="preReq">Prerequisites <input type="text" name="preReq" id="preReq" autocomplete="off"></label>
+            <label for="coReq">Corequisites <input type="text" name="coReq" id="coReq" autocomplete="off"></label>
+            <input type="submit" id="submit-class" name="submit-class" value="Add Class">
+        </form>
+    </div>
+    
+    <div class="taken-classes">
+        <div>
+            <h3>Classes Already Taken</h3>
+        </div>
+        <div>
+        {% for class in takenClasses%}
+            <li>{{class}}</li>
+        {%endfor%}
+        </div>
+    </div>
+
+   
+</div>
+<div class="form-holder">
+    <form action="/pickSchedule" class="classForm" method="post">
+    
+        {% for class in baseList %}
+            <li><input type="checkbox" id="{{ loop.index0 }}" name="courses" value="{{class.name}}"><label for="{{ loop.index0 }}" >{{class.name}} - {{class.credits}}</label></li>
+        {%endfor%}
+    
+        
+        <input type="checkbox" onclick="selectAllToggle(this)" id = "select-all"><label for="select-all">Select All</label>
+        <br>
+        <br><br>
+        <label for="semester">How many semesters to finish?</label><input type="text" id="semester" name="semesters" autocomplete="off" placeholder="i.e 4,5,6...">
+        <br>
+        <br>
+        <br>
+        <label for="quantity">How many schedules to generate?</label><input type="text" id="quantity" name="quantity" autocomplete="off" placeholder="1, 10, 100...">
+        <br>
+        <br>
+        <br>
+
+        <input type="submit" name="btn" value="Have Taken">
+        <input type="submit" name="btn" value="Clear History">
+        <input type="submit" name="btn" value="Delete">
+        <input type="submit" name="btn" value="To Take">
+    </form>
+</div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename = 'classes_script.js')}}"></script>
+{% endblock %}

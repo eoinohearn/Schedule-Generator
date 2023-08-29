@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+<div class="page-container">
+    <div class="form-holder">
+        {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            <div class="notification">
+                {{ messages[0] }}
+            </div>
+        {% endif %}
+        {% endwith %}
+        <form action="/login" method = "post" class="login-form">
+
+            <label for="name">Name <input type="text" id="name" name="name" placeholder="Big Al" autocomplete="off"></label>
+        
+            <label for="email">Email<input type="email" id="email"  name="email" placeholder="bamastudent@crimson.ua.edu" autocomplete="off"></label>
+            
+            <label for="password">Password<input type="text" name="password" id="password" autocomplete="off"></label>
+
+            <label for="checkbox">New Account <input type="checkbox" name="sign-up-checkbox" id="checkbox"></label>
+
+            <input type="submit" name="submit" id="submit-login">
+            
+        </form>
+    </div>
+</div>
+{% endblock %}

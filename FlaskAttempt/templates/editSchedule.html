@@ -1,0 +1,35 @@
+{%extends "base.html"%}
+{% block content%}
+{% with messages = get_flashed_messages() %}
+    {% if messages %}
+        <div class="notification">
+            {{ messages[0] }}
+        </div>
+{% endif %}
+{% endwith %}
+<button class="userBtn">Check Valid Schedule</button>
+<div class="schedule">
+    {% for semester in schedule%}
+        <div class="semester" id="semester {{loop.index}}" ondrop="drop(event)" ondragover="allowDrop(event)">
+            <div>Semester {{loop.index}}</div>
+            {%for class in semester%}
+                {% if class.name %}
+                    <div id="{{class.name}}" draggable="true" ondragstart="drag(event)">
+                        <button type="button" class="class">{{class.name}}</button>
+                        <div class="class-content">
+                            <p>Credits: {{class.credits}}</p>
+                            <p>Prerequisites: <br>{{class.preReq}}</p>
+                            <p>Corequisites: <br>{{class.coReq}}</p>
+                        </div>
+                    </div>
+                {%endif%}
+            {%endfor%}
+        </div>
+    {%endfor%}
+</div>
+{{scheduleString}}
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static', filename = 'editSchedule_script.js')}}"></script>
+{% endblock %}
