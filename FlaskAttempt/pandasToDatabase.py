@@ -1,7 +1,8 @@
 from app import app, db, main, Course_database
 app.app_context().push()
 
-df = main.pd.read_excel(r'C:\Users\drags\OneDrive\Desktop\Programacion\Personal\ClassScheduling\ClassListExcel.xlsx')
+df = main.pd.read_excel(r"C:\Users\drags\OneDrive\Desktop\Programacion\Personal\ClassScheduling - Copy\ClassListExcel.xlsx")
+
 df = df.fillna("empty")
 updated_list = main.make_Total_Classes_List(df)
 
