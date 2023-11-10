@@ -86,7 +86,6 @@ def satisfiesPreReq(sched, preReqs):
     seenCourses = {i.name:i.name for i in preReqs}
     for index in range(len(sched)): #number of semesters
         for courseIndex in range(len(sched[index])):
-            seenCourses[sched[index][courseIndex].name] = sched[index][courseIndex].name
             preReq = sched[index][courseIndex].preReq.split()
             if preReq != ['empty']:
                 for i in preReq:
@@ -94,6 +93,8 @@ def satisfiesPreReq(sched, preReqs):
                         continue
                     else:
                         return False
+        for courseIndex in range(len(sched[index])):
+            seenCourses[sched[index][courseIndex].name] = sched[index][courseIndex].name
             
             
     return True
