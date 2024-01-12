@@ -172,7 +172,7 @@ tr:nth-child(even) {
 }
 
 .dropzone{
-    border: 2px solid yellowgreen;
+    border: 2px solid rgb(154, 205, 50);
 }
 
 .class{
@@ -197,3 +197,53 @@ tr:nth-child(even) {
     background-color: #f1f1f1;
     /* width: 200px; */
 }
+
+.addClassBtn{
+    padding: 0 18px;
+    display: none;
+}
+
+.popup-addClass{
+    background-color: white;
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    left: 50%;
+    width: 400px;
+    height: 200px;
+    top: 30%;
+    transform: translate(-50%);
+    display: flex;
+    flex-direction: column;
+    overflow: auto;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    opacity: 1;
+}
+
+.hidden.popup-addClass{
+    visibility: hidden;
+    opacity: 0;
+}
+
+
+.deleteBtn{
+    background-color: rgb(105, 105, 105);
+    background-size: cover;
+    background-position: center;
+    position: fixed;
+    left: 50%;
+    width: 40px;
+    height: 20px;
+    bottom: 5%;
+    transform: translate(-50%);
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    opacity: 1;
+
+}
+

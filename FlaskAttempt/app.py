@@ -221,6 +221,7 @@ def favSchedule():
 
 @app.route("/editSchedule", methods=['POST','GET'])
 def editSchedule():
+    baseList = Course_database.query.order_by(Course_database.name).all()
     df = main.makeDataFrameHtmlTable(current_user.schedule)
     favList = main.makeListfromDataFrame(df)
     listOfObj = []
@@ -228,7 +229,7 @@ def editSchedule():
         listOfObj.append(list(map(lambda x:Course_database.query.filter(Course_database.name == x).first(), semester)))
         
 
-    return render_template('editSchedule.html', schedule = listOfObj)
+    return render_template('editSchedule.html', schedule = listOfObj, baseList = baseList)
 
 
 @app.route("/validSchedule", methods=['POST','GET'])
@@ -255,6 +256,25 @@ def validSchedule():
 
 
         return json.dumps(message)
+    
+
+@app.route("/addNewClassSchedule", methods=['POST', 'GET'])
+def addNewClassSchedule():
+    if request.method == 'POST':
+        courseNames = request.get_json()
+        List_New_Classes = Course_database.query.filter(Course_database.name.in_(courseNames)).all()
+        List_To_Return = []
+
+        for course in List_New_Classes:
+            temp = {}
+            temp["name"] = course.name
+            temp["credits"] = course.credits
+            temp["preReq"] = course.preReq
+            temp["coReq"] = course.coReq
+            List_To_Return.append(temp)
+
+
+        return json.dumps(List_To_Return)
 
 
 

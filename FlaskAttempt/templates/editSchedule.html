@@ -7,10 +7,19 @@
         </div>
 {% endif %}
 {% endwith %}
+<div class = "popup-addClass hidden">
+    <h1>Add Class</h1>
+    {% for class in baseList %}
+        <li><input type="checkbox" id="{{ loop.index0 }}" name="courses" value="{{class.name}}"><label for="{{ loop.index0 }}" >{{class.name}} - {{class.credits}}</label></li>
+    {%endfor%}
+    <button onclick = "addNewClass()">Add Class</button>
+</div>
 <button class="userBtn">Check Valid Schedule</button>
 <div class="schedule">
     {% for semester in schedule%}
-        <div class="semester" id="semester {{loop.index}}" ondrop="drop(event)" ondragover="allowDrop(event)">
+        <div class="semester" id="semester {{loop.index}}" ondrop="drop(event)" ondragover="allowDrop(event)" 
+        onmouseover="this.lastElementChild.style.display =  'block';"
+        onmouseleave="this.lastElementChild.style.display = 'none'">
             <div>Semester {{loop.index}}</div>
             {%for class in semester%}
                 {% if class.name %}
@@ -24,9 +33,11 @@
                     </div>
                 {%endif%}
             {%endfor%}
+            <button class = 'addClassBtn' id="addClassBtn" onclick="addNewClassPopup(this)">Add Class</button>
         </div>
     {%endfor%}
 </div>
+<div class="deleteBtn" ondrop="drop(event)" ondragover="allowDrop(event)">Delete</div>
 {{scheduleString}}
 {% endblock %}
 
